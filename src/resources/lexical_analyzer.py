@@ -11,10 +11,13 @@ ferramenta PLY (módulo LEX).
 @Date: September - 2022
 """
 
+import sys
+
 import resources.ply.lex as lex
+from resources.symtable import Symtable
 
 class LexicalAnalyzer(object):
-  '''Analisador léxico para linguagem CC-2022-2.'''
+  '''Analisador léxico para linguagem LCC-2022-2.'''
   
   # Lista de palavras reservadas.
   reserved = {
@@ -55,7 +58,7 @@ class LexicalAnalyzer(object):
   t_DIFFERENT          = r'!='
   t_INT_CONSTANT       = r'[0-9]+(E[\+-]?[0-9]+)?'
   t_FLOAT_CONSTANT     = r'[0-9]+\.[0-9]+(E[\+-]?[0-9]+(\.[0-9]+)?)?'
-  t_STRING_CONSTANT    = r'".*"'
+  t_STRING_CONSTANT    = r'(".*"|\'.*\')'
   t_ignore             = ' \t'
   
   def t_ID(self, t):
@@ -75,11 +78,11 @@ class LexicalAnalyzer(object):
     Encontra a coluna de determinado token.
     
     Returns
-    ----------
+    -------
     int
       Coluna do token avaliado.
-
     '''
+
     line_start = self.data.rfind('\n', 0, t.lexpos) + 1
     return (t.lexpos - line_start) + 1
 
@@ -90,7 +93,8 @@ class LexicalAnalyzer(object):
 
   def read_input(self, data):
     '''
-    Lê uma entrada e computa os tokens contidos nela.
+    Lê uma entrada, computa os tokens contidos nela e constrói a tabela
+    de símbolos.
     
     Parameters
     ----------
@@ -98,30 +102,50 @@ class LexicalAnalyzer(object):
       Dados a serem lidos.
     '''
 
+    if not hasattr(self, 'lexer'):
+      raise Exception('O analisador não foi inicializado!')
+
     self.data = data
     self.lexer.input(data)
-    self.token_list = [token for token in self.lexer]
+    self.token_list = []
+    self.symtable = Symtable()
+    for token in self.lexer:
+      self.token_list.append(token)
 
-  def pretty_print_input(self):
-    '''Imprime os tokens computados pelo analisador, em formato legível.'''
+      if token.type == 'ID':
+        self.symtable.add_item(token.value, (token.lineno, self.find_column(token)))
+
+  def pretty_print_input(self, file=sys.stdout):
+    '''
+    Imprime, onde especificado, os tokens computados pelo analisador, em 
+    formato legível.
+    
+    Parameters
+    ----------
+    file : str (default = sys.stdout)
+      Caminho de saída para impressão dos tokens.
+    '''
+
+    if not hasattr(self, 'data'):
+      raise Exception('Nenhum dado fornecido como entrada!')
 
     n_tabs = 0
     last_line = 1
     string = ''
-    for token in self.token_list:
-      if token.value == '}': n_tabs -= 1
 
-      if token.lineno != last_line: 
-        last_line = token.lineno
+    for token in self.token_list:
+      if token.value in '})': n_tabs -= 1
+
+      while token.lineno != last_line: 
+        last_line += 1
         string += '\n' + '  ' * n_tabs
 
-      string += (
-        ('\b' if token.value in '[]]);,' and string[-1] not in '[(' else '') + 
-        token.type + 
-        (' ' if token.value not in '[(' else ''))
+      if token.value in '[]);,' and string[-1] not in '[(': string = string[:-1]
+      string += token.type
+      if token.value not in '[(': string += ' '
 
-      if token.value == '{': n_tabs += 1
+      if token.value in '{(': n_tabs += 1
     
-    print(string)
+    print(string, file=file)
 
   

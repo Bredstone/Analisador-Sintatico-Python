@@ -19,6 +19,12 @@ if __name__ == '__main__':
   try:
     if len(sys.argv) == 2:
       _, data_file = sys.argv
+      output_file = output_file2 = None
+    elif len(sys.argv) == 3:
+      _, data_file, output_file = sys.argv
+      output_file2 = None
+    elif len(sys.argv) == 4:
+      _, data_file, output_file, output_file2 = sys.argv
     else:
       raise Exception('Número de argumentos inválido!')
     
@@ -26,6 +32,9 @@ if __name__ == '__main__':
       lex = LexicalAnalyzer()
       lex.build()
       lex.read_input(file.read())
-      lex.pretty_print_input()
+      if output_file: output_file = open(output_file, 'w')
+      lex.pretty_print_input(output_file)
+      if output_file2: output_file = open(output_file2, 'w')
+      lex.symtable.pretty_print(output_file, tablefmt='html' if output_file2.endswith('.html') else None)
   except Exception as e:
     print(e)
