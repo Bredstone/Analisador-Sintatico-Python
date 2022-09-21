@@ -146,6 +146,6 @@ class LexicalAnalyzer(object):
 
       if token.value in '{(': n_tabs += 1
     
-    print(string, file=file)
+    print(string, end='\n' * 2, file=file)
 
   

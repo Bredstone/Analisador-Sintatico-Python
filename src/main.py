@@ -17,24 +17,23 @@ from resources.lexical_analyzer import LexicalAnalyzer
 
 if __name__ == '__main__':
   try:
-    if len(sys.argv) == 2:
-      _, data_file = sys.argv
-      output_file = output_file2 = None
-    elif len(sys.argv) == 3:
-      _, data_file, output_file = sys.argv
-      output_file2 = None
-    elif len(sys.argv) == 4:
-      _, data_file, output_file, output_file2 = sys.argv
-    else:
+    if len(sys.argv) < 2 or len(sys.argv) > 4:
       raise Exception('Número de argumentos inválido!')
-    
-    with open(data_file) as file:
+
+    _, data_file_path, *output_file_path = sys.argv
+    output_file = None
+
+    with open(data_file_path) as file:
       lex = LexicalAnalyzer()
       lex.build()
       lex.read_input(file.read())
-      if output_file: output_file = open(output_file, 'w')
+
+      if len(output_file_path) >= 1: 
+        output_file = open(output_file_path[0], 'w')
       lex.pretty_print_input(output_file)
-      if output_file2: output_file = open(output_file2, 'w')
-      lex.symtable.pretty_print(output_file, tablefmt='html' if output_file2.endswith('.html') else None)
+
+      if len(output_file_path) == 2: 
+        output_file = open(output_file_path[1], 'w')
+      lex.symtable.pretty_print(output_file)
   except Exception as e:
     print(e)
