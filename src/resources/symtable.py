@@ -50,10 +50,9 @@ class Symtable(object):
       referências).
     '''
 
-    separator = '<BR />' if tablefmt == 'html' else '\n'
     print(
       tabulate(
-        ((key, separator.join([str(x) for x in positions])) for key, positions in self.table.items()), 
+        ((key, '\n'.join([str(x) for x in positions])) for key, positions in self.table.items()), 
         headers=['ID', '(LINHA, COLUNA)'],
         colalign=('left', 'center'),
         tablefmt=tablefmt

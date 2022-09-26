@@ -1,0 +1,108 @@
+def is_empty () {
+  if(top == -1) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+def is_full () {
+	if (top == capacity - 1) {
+		return 1;
+	} else {
+		return 0;
+	}
+}
+
+def append (string value) {
+	top = top + 1;
+	elements[top] = value;
+}
+
+def pop () {
+  string aux;
+  aux = elements[top];
+
+  top = top - 1;
+  return aux;
+}
+
+def return_top () {
+  return elements[top];
+}
+
+def print_stack () {
+	if(is_full() == 1) {
+		print "Pilha cheia!";
+	} else {
+		if(is_empty() == 1){
+			print "Pilha vazia!";
+		}
+	}
+
+	int i;
+	for (i = capacity; i >= 0; i = i - 1){
+		print elements[i];
+	}
+}
+
+int top;
+top = -1;
+
+int capacity;
+capacity = 10;
+
+string elements;
+elements = new string[10];
+
+string objects[10];
+objects = new string[10];
+objects[0] = "apple";
+objects[1] = "banana";
+objects[2] = "car";
+objects[3] = "table";
+objects[4] = "book";
+objects[5] = "case";
+objects[6] = "shelf";
+objects[7] = "blanket";
+objects[8] = "lantern";
+objects[9] = "pencil";
+
+print_stack();
+print '\n';
+
+append(objects[0]);
+append(objects[1]);
+append(objects[2]);
+append(objects[3]);
+append(objects[4]);
+
+print_stack();
+print '\n';
+
+append(objects[5]);
+append(objects[6]);
+append(objects[7]);
+append(objects[8]);
+append(objects[9]);
+
+print_stack();
+print '\n';
+
+pop();
+pop();
+pop();
+pop();
+pop();
+
+print_stack();
+print '\n';
+
+pop();
+pop();
+pop();
+pop();
+pop();
+
+print_stack();
+print '\n';

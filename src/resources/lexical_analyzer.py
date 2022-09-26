@@ -21,19 +21,19 @@ class LexicalAnalyzer(object):
   
   # Lista de palavras reservadas.
   reserved = {
-    'def': 'DEF',
-    'int': 'INT',
-    'float': 'FLOAT',
+    'def'   : 'DEF',
+    'int'   : 'INT',
+    'float' : 'FLOAT',
     'string': 'STRING',
-    'break': 'BREAK',
-    'print': 'PRINT',
-    'read': 'READ',
+    'break' : 'BREAK',
+    'print' : 'PRINT',
+    'read'  : 'READ',
     'return': 'RETURN',
-    'if' : 'IF',
-    'else' : 'ELSE',
-    'for' : 'FOR',
-    'new': 'NEW',
-    'null': 'NULL',
+    'if'    : 'IF',
+    'else'  : 'ELSE',
+    'for'   : 'FOR',
+    'new'   : 'NEW',
+    'null'  : 'NULL',
   }
 
   # Lista de tokens.

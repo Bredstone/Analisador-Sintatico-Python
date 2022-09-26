@@ -1,5 +1,5 @@
 VENV = venv
-PYTHON = $(VENV)/bin/python3
+PYTHON = $(VENV)/bin/python3 # Python 3 - 3.10
 PIP = $(VENV)/bin/pip
 
 help:
