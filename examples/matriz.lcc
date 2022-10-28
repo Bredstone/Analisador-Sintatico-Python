@@ -1,27 +1,3 @@
-int row1;
-row1 = 2;
-
-int col1;
-col1 = 2;
-
-int row2;
-row2 = 2;
-
-int col2;
-col2 = 2;
- 
-int A = new int[2][2];
-A[0][0] = 5;
-A[0][1] = 5;
-A[1][0] = 2;
-A[1][1] = 2;
- 
-int B = new int[2][2];
-B[0][0] = 6;
-B[0][1] = 6;
-B[1][0] = 1;
-B[1][1] = 1;
-
 def multiplyMatrix (int row1, int col1, int A, int row2, int col2, int B) {
   int i;
   int j;
@@ -35,7 +11,8 @@ def multiplyMatrix (int row1, int col1, int A, int row2, int col2, int B) {
     print "Matriz 2:";
     print B;
 
-    int C = new int[row1][col2];
+    int C;
+    C = new int[row1][col2];
 
     for (i = 0; i < row1; i = i + 1) {
       for (j = 0; j < col2; j = j + 1) {
@@ -45,12 +22,10 @@ def multiplyMatrix (int row1, int col1, int A, int row2, int col2, int B) {
       }
     }
 
-    print "Resultado:"
+    print "Resultado:";
     print C;
-  }
+  } endif;
 }
- 
-multiplyMatrix (row1, col1, A, row2, col2, B);
 
 def addMatrix (int row1, int col1, int A, int row2, int col2, int B) {
   int i;
@@ -66,7 +41,8 @@ def addMatrix (int row1, int col1, int A, int row2, int col2, int B) {
     print "Matriz 2:";
     print B;
 
-    int C = new int[row1][col2];
+    int C;
+    C = new int[row1][col2];
 
     for (i = 0; i < row1; i = i + 1) {
       for (j = 0; j < col1; j = j + 1) {
@@ -74,12 +50,10 @@ def addMatrix (int row1, int col1, int A, int row2, int col2, int B) {
       }
     }
 
-    print "Resultado:"
+    print "Resultado:";
     print C;
-  }
+  } endif; endif;
 }
- 
-addMatrix (row1, col1, A, row2, col2, B);
 
 def subtractMatrix (int row1, int col1, int A, int row2, int col2, int B) {
   int i;
@@ -95,7 +69,8 @@ def subtractMatrix (int row1, int col1, int A, int row2, int col2, int B) {
     print "Matriz 2:";
     print B;
     
-    int C = new int[row1][col2];
+    int C;
+    C = new int[row1][col2];
 
     for (i = 0; i < row1; i = i + 1) {
       for (j = 0; j < col1; j = j + 1) {
@@ -103,9 +78,40 @@ def subtractMatrix (int row1, int col1, int A, int row2, int col2, int B) {
       }
     }
 
-    print "Resultado:"
+    print "Resultado:";
     print C;
-  }
+    return;
+  } endif; endif;
 }
- 
-subtractMatrix (row1, col1, A, row2, col2, B);
+
+def main () {
+  int row1;
+  row1 = 2;
+
+  int col1;
+  col1 = 2;
+
+  int row2;
+  row2 = 2;
+
+  int col2;
+  col2 = 2;
+  
+  int A;
+  A = new int[2][2];
+  A[0][0] = 5;
+  A[0][1] = 5;
+  A[1][0] = 2;
+  A[1][1] = 2;
+  
+  int B;
+  B = new int[2][2];
+  B[0][0] = 6;
+  B[0][1] = 6;
+  B[1][0] = 1;
+  B[1][1] = 1;
+  
+  multiplyMatrix (row1, col1, A, row2, col2, B);
+  addMatrix (row1, col1, A, row2, col2, B);
+  subtractMatrix (row1, col1, A, row2, col2, B);
+}

@@ -10,27 +10,12 @@ def insertionSort (int vetor, int size) {
     for (i = j - 1; i >= 0; i = i - 1) {
       if (vetor[i] > key) {
         vetor[i + 1] = vetor[i];
-      }
+      } endif;
     }
     
     vetor[i + 1] = key;
   }
 }
-
-int vetor_teste = new int[10];
-vetor_teste[0] = 10;
-vetor_teste[1] = 9;
-vetor_teste[2] = 8;
-vetor_teste[3] = 7;
-vetor_teste[4] = 6;
-vetor_teste[5] = 5;
-vetor_teste[6] = 4;
-vetor_teste[7] = 3;
-vetor_teste[8] = 2;
-vetor_teste[9] = 1;
-
-insertionSort(vetor_teste, 10);
-print vetor_teste;
 
 def heapify (int vetor, int size, int i) {
 
@@ -42,18 +27,18 @@ def heapify (int vetor, int size, int i) {
   
   int r;
   r = 2 * i + 2;
- 
+
   if (l < size) {
     if (vetor[l] > vetor[largest]) {
       largest = l;
-    }
-  }
- 
+    } endif;
+  } endif;
+
   if (r < size) {
     if (vetor[r] > vetor[largest]) {
       largest = r;
-    }
-  }
+    } endif;
+  } endif;
 
   if (largest != i) {
     int swap;
@@ -61,9 +46,9 @@ def heapify (int vetor, int size, int i) {
     
     vetor[i] = vetor[largest];
     vetor[largest] = swap;
- 
+
     heapify (vetor, size, largest);
-  }
+  } endif;
 }
 
 def heapSort (int vetor, int size) {
@@ -85,17 +70,36 @@ def heapSort (int vetor, int size) {
   }
 }
 
-int vetor_teste = new int[10];
-vetor_teste[0] = 10;
-vetor_teste[1] = 9;
-vetor_teste[2] = 8;
-vetor_teste[3] = 7;
-vetor_teste[4] = 6;
-vetor_teste[5] = 5;
-vetor_teste[6] = 4;
-vetor_teste[7] = 3;
-vetor_teste[8] = 2;
-vetor_teste[9] = 1;
+def main () {
+  int vetor_teste;
+  vetor_teste = new int[10];
+  vetor_teste[0] = 10;
+  vetor_teste[1] = 9;
+  vetor_teste[2] = 8;
+  vetor_teste[3] = 7;
+  vetor_teste[4] = 6;
+  vetor_teste[5] = 5;
+  vetor_teste[6] = 4;
+  vetor_teste[7] = 3;
+  vetor_teste[8] = 2;
+  vetor_teste[9] = 1;
 
-heapSort (vetor_teste, 10);
-print vetor_teste;
+  insertionSort(vetor_teste, 10);
+  print vetor_teste;
+
+  int vetor_teste;
+  vetor_teste = new int[10];
+  vetor_teste[0] = 10;
+  vetor_teste[1] = 9;
+  vetor_teste[2] = 8;
+  vetor_teste[3] = 7;
+  vetor_teste[4] = 6;
+  vetor_teste[5] = 5;
+  vetor_teste[6] = 4;
+  vetor_teste[7] = 3;
+  vetor_teste[8] = 2;
+  vetor_teste[9] = 1;
+
+  heapSort (vetor_teste, 10);
+  print vetor_teste;
+}

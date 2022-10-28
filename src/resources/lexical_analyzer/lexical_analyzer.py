@@ -13,8 +13,8 @@ ferramenta PLY (módulo LEX).
 
 import sys
 
-import resources.ply.lex as lex
-from resources.symtable import Symtable
+import resources.lexical_analyzer.ply.lex as lex
+from resources.lexical_analyzer.symtable import Symtable
 
 class LexicalAnalyzer(object):
   '''Analisador léxico para linguagem LCC-2022-2.'''
@@ -34,6 +34,7 @@ class LexicalAnalyzer(object):
     'for'   : 'FOR',
     'new'   : 'NEW',
     'null'  : 'NULL',
+    'endif' : 'ENDIF',
   }
 
   # Lista de tokens.

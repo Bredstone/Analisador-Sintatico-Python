@@ -1,19 +1,20 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Analisador Léxico.
+"""
+Analisador Sintático.
 
-Projeto de um analisador léxico, desenvolvido em Python, com utilização da
-ferramenta PLY (módulo LEX).
+Projeto de um analisador sintático, desenvolvido em Python; em conjunto com um 
+analisador léxico, construído com auxílio da ferramenta PLY (módulo LEX).
 
 @Author: Brendon Vicente Rocha Silva
 @Email: bredstone13@gmail.com
-@Date: September - 2022
+@Date: October - 2022
 """
 
 import sys
 
-from resources.lexical_analyzer import LexicalAnalyzer
+from resources.parser.grammar import Grammar
 
 if __name__ == '__main__':
   try:
@@ -22,18 +23,16 @@ if __name__ == '__main__':
 
     _, data_file_path, *output_file_path = sys.argv
     output_file = None
+    verbose = False
 
     with open(data_file_path) as file:
-      lex = LexicalAnalyzer()
-      lex.build()
-      lex.read_input(file.read())
-
+      parser = Grammar.fromFile('./src/resources/grammar.txt')
+      
       if len(output_file_path) >= 1: 
         output_file = open(output_file_path[0], 'w')
-      lex.pretty_print_input(output_file)
+        verbose = True
 
-      if len(output_file_path) == 2: 
-        output_file = open(output_file_path[1], 'w')
-      lex.symtable.pretty_print(output_file)
+      if parser.readInputLEX(file, output_file=output_file, verbose=verbose):
+        print('Código válido!')
   except Exception as e:
     print(e)

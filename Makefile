@@ -10,22 +10,18 @@ help:
 	@echo '  run				Executa o programa.'
 	@echo '  clean				Remove os artefatos criados.'
 	@echo 
-	@echo RUN: make run INPUT_FILE [ARG1=file_path ARG2=file_path]
+	@echo RUN: make run INPUT_FILE [OUTPUT_FILE=file_path]
 	@echo '  INPUT_FILE:'
-	@echo '    Caminho do arquivo contendo os dados a serem analisados.'
+	@echo '    Caminho do arquivo contendo os dados a serem analisados, na linguagem CC-2022-2.'
 	@echo
 	@echo '  Se nenhum argumento for especificado, executa o programa e imprime, no'
-	@echo '  terminal, os tokens computados e a tabela de símbolos.'
+	@echo '  terminal, se a entrada é válida ou não.'
 	@echo
-	@echo '  ARG1:'
-	@echo '    Caminho para escrita dos tokens (e tabela).'
-	@echo '    Se apenas ARG1 for especificado, imprime os tokens computados e a'
-	@echo '    tabela de símbolos no mesmo arquivo.'
-	@echo '  ARG2:'
-	@echo '    Caminho para escrita da tabela de símbolos.'
+	@echo '  OUTPUT_FILE [OPTIONAL]:'
+	@echo '    Caminho para escrita dos logs de execução (pilha e entrada de dados, a cada iteração).'
 
 run: $(VENV)/bin/activate
-	$(PYTHON) src/main.py $(INPUT_FILE) $(SYMBOLS_PATH) $(SYMTABLE_PATH)
+	$(PYTHON) src/main.py $(INPUT_FILE) $(OUTPUT_FILE)
 	@make clean
 
 $(VENV)/bin/activate: requirements.txt
