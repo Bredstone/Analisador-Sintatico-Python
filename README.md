@@ -58,7 +58,7 @@ NUMEXPRESSION   → TERM ((+ | −) TERM)∗
 TERM            → UNARYEXPR((∗ | / | %) UNARYEXPR)∗
 UNARYEXPR       → ((+ | −))? FACTOR
 FACTOR          → (int_constant | float_constant | string_constant | null | LVALUE | (NUMEXPRESSION) | FUNCCALL)
-LVALUE          → ident([NUMEXP RESSION])
+LVALUE          → ident([NUMEXPRESSION])
 ```
 <br />
 <br />
